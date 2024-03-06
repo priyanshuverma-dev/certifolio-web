@@ -8,6 +8,7 @@ import { Clipboard, ClipboardCopy, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useToast } from "./ui/use-toast";
+import { Skeleton } from "./ui/skeleton";
 
 const FeedSection = () => {
   const { data, error, status } = useFeeds();
@@ -20,10 +21,28 @@ const FeedSection = () => {
       </div>
     );
   }
+
   if (status == "pending") {
     return (
-      <div className=" p-2 flex items-center justify-center font-mono">
-        Loading...
+      <div className="h-[100vh]">
+        <div className="p-2">
+          <div className="flex items-center space-x-4">
+            <Skeleton className="h-12 w-12 rounded-full" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+        </div>
+        <div className="p-2">
+          <div className="flex items-center space-x-4">
+            <Skeleton className="h-12 w-12 rounded-full" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -36,7 +55,7 @@ const FeedSection = () => {
   }
 
   return (
-    <div className="py-2 h-full">
+    <div className="py-2 h-full space-y-2">
       {data?.map((d) => (
         <div key={d.id} className="border-2 rounded-xl p-2 border-dashed">
           <div>

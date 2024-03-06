@@ -3,7 +3,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { HomeIcon } from "lucide-react";
+import { ChevronLeftIcon, HomeIcon, StepBackIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -28,7 +28,7 @@ const ViewPage = (props: Props) => {
                 "m-2"
               )}
             >
-              <HomeIcon />
+              <ChevronLeftIcon />
             </Link>
             <div className="p-2">
               <Button variant={"destructive"}>Report</Button>

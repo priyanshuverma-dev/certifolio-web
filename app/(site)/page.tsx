@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 export default function Home() {
   return (
     <CenterContainer>
-      <div className="flex flex-col mx-2 h-screen">
+      <div className="flex flex-col mx-2 h-full">
         <AddCredentialSection />
         <Separator />
         <FeedSection />
