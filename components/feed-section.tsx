@@ -38,7 +38,7 @@ const FeedSection = () => {
   return (
     <div className="py-2 h-full">
       {data?.map((d) => (
-        <div className="border-2 rounded-xl p-2 border-dashed">
+        <div key={d.id} className="border-2 rounded-xl p-2 border-dashed">
           <div>
             <AspectRatio ratio={16 / 9}>
               <Image
