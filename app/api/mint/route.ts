@@ -1,11 +1,11 @@
 import { auth } from "@/auth";
 import db from "@/lib/db";
-import { NFT_ENDPOINT, NFT_STORAGE_TOKEN } from "@/lib/ipfs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const session = await auth();
   try {
+    const session = await auth();
+
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 400 });
     }

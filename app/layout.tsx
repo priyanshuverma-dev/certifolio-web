@@ -6,6 +6,7 @@ import AuthProvider from "@/providers/auth-provider";
 import { auth } from "@/auth";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import QueryProvider from "@/providers/query";
 
 const inter = Rubik({ subsets: ["latin"] });
 
@@ -27,16 +28,18 @@ export default async function RootLayout({
     <AuthProvider session={session}>
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <NextTopLoader
-            showSpinner
-            template='<div class="bar" role="bar"><div class="peg"></div></div>
+          <QueryProvider>
+            <NextTopLoader
+              showSpinner
+              template='<div class="bar" role="bar"><div class="peg"></div></div>
                 <div class="spinner" role="spinner"><div class="spinner-icon fixed bottom-0 right-0 m-2"></div></div>'
-          />
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
-            {modal}
-            <Toaster />
-          </ThemeProvider>
+            />
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              {children}
+              {modal}
+              <Toaster />
+            </ThemeProvider>
+          </QueryProvider>
         </body>
       </html>
     </AuthProvider>

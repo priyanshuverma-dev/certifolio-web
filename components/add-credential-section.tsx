@@ -17,7 +17,7 @@ const AddCredentialSection = async () => {
           </Avatar>
         </div>
         <Link
-          className={cn(buttonVariants({ variant: "secondary" }))}
+          className={cn(buttonVariants({ variant: "outline" }))}
           href={"/new"}
         >
           Create

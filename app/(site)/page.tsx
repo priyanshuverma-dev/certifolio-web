@@ -1,14 +1,15 @@
 import AddCredentialSection from "@/components/add-credential-section";
 import CenterContainer from "@/components/center-container";
+import FeedSection from "@/components/feed-section";
 import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
     <CenterContainer>
-      <div className="flex flex-col mx-2">
+      <div className="flex flex-col mx-2 h-screen">
         <AddCredentialSection />
         <Separator />
-        <div>Hello</div>
+        <FeedSection />
       </div>
     </CenterContainer>
   );
