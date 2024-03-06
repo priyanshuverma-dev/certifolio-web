@@ -61,7 +61,8 @@ model Certificate {
   credentialId String?
   issuer       String?
   userId       String   @db.ObjectId
-  secureId     String
+  cid          String   @unique
+  size         Int?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
