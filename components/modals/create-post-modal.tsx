@@ -6,10 +6,8 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -26,17 +24,21 @@ import {
 import FileUpload from "../file-upload";
 import { NFT_ENDPOINT, NFT_STORAGE_TOKEN } from "@/lib/ipfs";
 
-const allowedFileTypes = ["image/*"];
-
 const formSchema = z.object({
   title: z.string().min(3),
-  image: z
-    .instanceof(File, {
+  image: z.custom(
+    (value) => {
+      // Check if File is available (browser environment)
+      if (typeof File !== "undefined" && value instanceof File) {
+        return true; // Valid File instance
+      } else {
+        return false; // Not a valid File instance
+      }
+    },
+    {
       message: "Select the image",
-    })
-    .refine((f) =>
-      allowedFileTypes.includes(f.type) ? null : "Select Appropriate image only"
-    ),
+    }
+  ),
 });
 
 const CreatePostModal = () => {
