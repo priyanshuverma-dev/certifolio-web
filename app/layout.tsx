@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
+
+import { Analytics } from "@vercel/analytics/react";
 import NextTopLoader from "nextjs-toploader";
 import AuthProvider from "@/providers/auth-provider";
 import { auth } from "@/auth";
@@ -58,6 +60,7 @@ export default async function RootLayout({
               <Toaster />
             </ThemeProvider>
           </QueryProvider>
+          <Analytics />
         </body>
       </html>
     </AuthProvider>
