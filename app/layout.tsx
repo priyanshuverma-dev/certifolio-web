@@ -19,7 +19,10 @@ const description =
   "CertiFolio is a platform where users can securely upload, showcase, and verify their certificates and achievements on the InterPlanetary File System (IPFS).";
 
 export const metadata: Metadata = {
-  title: title,
+  title: {
+    template: "%s | CertiFolio",
+    default: title,
+  },
   description: description,
   openGraph: {
     title: title,

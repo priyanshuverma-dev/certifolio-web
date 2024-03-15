@@ -4,7 +4,7 @@ import React from "react";
 import { AspectRatio } from "./ui/aspect-ratio";
 import Image from "next/image";
 import { Button, buttonVariants } from "./ui/button";
-import { Clipboard, ClipboardCopy, ExternalLink } from "lucide-react";
+import { Clipboard, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useToast } from "./ui/use-toast";
@@ -48,7 +48,8 @@ const FeedSection = () => {
   }
 
   function copyCid(cid: string) {
-    navigator.clipboard.writeText(cid);
+    const txt = `https://ipfs.io/ipfs/${cid}`;
+    navigator.clipboard.writeText(txt);
     toast({
       title: "Copied to clipboard",
     });
@@ -59,7 +60,7 @@ const FeedSection = () => {
       {data?.map((d) => (
         <div key={d.id} className="border-2 rounded-xl p-2 border-dashed">
           <div>
-            <AspectRatio ratio={16 / 9}>
+            <AspectRatio ratio={1}>
               <Image
                 fill
                 className="rounded-lg"
@@ -79,7 +80,7 @@ const FeedSection = () => {
               className="w-full"
               variant={"secondary"}
             >
-              <Clipboard className="p-1" /> Copy Cid
+              <Clipboard className="p-1" /> Copy Cid Url
             </Button>
           </div>
           <div className="flex items-center justify-between p-2">
