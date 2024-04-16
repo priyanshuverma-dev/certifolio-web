@@ -32,6 +32,7 @@ const AddCredentialSection = async () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <p>{session?.user.username}</p>
         </div>
         <div className="flex items-center">
           <Link
