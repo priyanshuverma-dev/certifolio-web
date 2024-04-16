@@ -45,7 +45,7 @@ model User {
   name          String?
   username      String        @unique
   email         String?       @unique
-  bio           String?
+  bio           String        @default("I am a developer")
   emailVerified DateTime?
   image         String?
   createdAt     DateTime      @default(now())

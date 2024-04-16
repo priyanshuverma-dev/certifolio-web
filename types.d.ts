@@ -37,3 +37,15 @@ type Nft = {
     ];
   };
 };
+
+type User = {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  bio: string;
+  emailVerified: Date | null;
+  image: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};

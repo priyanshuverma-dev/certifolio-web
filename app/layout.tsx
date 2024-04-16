@@ -51,7 +51,7 @@ export default async function RootLayout({
         <body
           className={cn(
             inter.className,
-            "bg-gradient-to-r from-slate-900 to-stone-800"
+            "bg-gradient-to-r dark:from-slate-900 dark:to-stone-800 from-slate-50 to-stone-200"
           )}
         >
           <QueryProvider>

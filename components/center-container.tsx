@@ -15,9 +15,7 @@ const CenterContainer = ({
       className={cn("flex items-center flex-col justify-center", className)}
       {...props}
     >
-      <div className="w-full sm:w-[606px] border-x-2 rounded-sm">
-        {children}
-      </div>
+      <div className="w-full sm:w-[606px] border-x-2 my-1">{children}</div>
     </div>
   );
 };
