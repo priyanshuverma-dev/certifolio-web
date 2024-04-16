@@ -4,7 +4,10 @@ import { signOut } from "next-auth/react";
 import React from "react";
 
 const LogOutPage = () => {
-  signOut();
+  signOut({
+    callbackUrl: "/",
+    redirect: true,
+  });
   return <div className="flex items-center justify-center">Logging out..</div>;
 };
 

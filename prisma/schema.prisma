@@ -43,7 +43,9 @@ model Session {
 model User {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
+  username      String        @unique
   email         String?       @unique
+  bio           String?
   emailVerified DateTime?
   image         String?
   createdAt     DateTime      @default(now())
@@ -59,6 +61,7 @@ model Certificate {
   description  String?
   isPublic     Boolean  @default(false)
   credentialId String?
+  verifyingUrl String?
   issuer       String?
   userId       String   @db.ObjectId
   cid          String   @unique
