@@ -10,14 +10,21 @@ interface FileUploadProps {
   onChange: (url?: any) => void;
   value: File | null;
   children: React.ReactNode;
+  disabled?: boolean;
 }
-const FileUpload = ({ onChange, value, children }: FileUploadProps) => {
+const FileUpload = ({
+  onChange,
+  value,
+  children,
+  disabled,
+}: FileUploadProps) => {
   if (value) {
     const imageUrl = URL.createObjectURL(value);
     return (
-      <AspectRatio ratio={16 / 9}>
+      <AspectRatio ratio={3 / 2}>
         <Image fill src={imageUrl} alt="Upload" className="rounded-md" />
         <button
+          disabled={disabled}
           onClick={() => {
             onChange(null);
           }}

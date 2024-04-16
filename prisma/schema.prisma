@@ -41,28 +41,31 @@ model Session {
 }
 
 model User {
-  id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  username      String        @unique
-  email         String?       @unique
-  bio           String        @default("I am a developer")
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  accounts      Account[]
-  sessions      Session[]
-  Certificates  Certificate[]
+  id                     String        @id @default(auto()) @map("_id") @db.ObjectId
+  name                   String?
+  username               String        @unique
+  email                  String?       @unique
+  bio                    String        @default("I am a developer")
+  emailVerified          DateTime?
+  image                  String?
+  certificatesCategories String[]
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+  accounts               Account[]
+  sessions               Session[]
+  Certificates           Certificate[]
 }
 
 model Certificate {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   title        String
-  description  String?
+  description  String   @default("Good Certificate")
   isPublic     Boolean  @default(false)
   credentialId String?
-  verifyingUrl String?
-  issuer       String?
+  category     String?
+  pinned       Boolean  @default(false)
+  verifyUrl    String?
+  issuer       String   @default("Unkown")
   userId       String   @db.ObjectId
   cid          String   @unique
   size         Int?

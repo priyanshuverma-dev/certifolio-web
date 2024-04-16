@@ -20,7 +20,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 400 });
     }
 
-    const { title, cid, size } = await req.json();
+    const { title, cid, size, description, issuer, verifyUrl } =
+      await req.json();
 
     const existRecord = await db.certificate.findUnique({
       where: {
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest) {
     if (existRecord) {
       return NextResponse.json(
         {
-          message: `This credential is already minted by ${existRecord.user.name}`,
+          message: `This credential is already minted by ${existRecord.user.username}`,
         },
         { status: 400 }
       );
@@ -46,6 +47,9 @@ export async function POST(req: NextRequest) {
         cid,
         size,
         userId: user.id,
+        description,
+        issuer,
+        verifyUrl,
       },
     });
 

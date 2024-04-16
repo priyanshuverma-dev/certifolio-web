@@ -1,11 +1,12 @@
 import React from "react";
-import CreatePostModal from "@/components/modals/create-post-modal";
-const NewPost = () => {
+import CreateCertModal from "@/components/modals/create-cert-modal";
+
+const NewCert = () => {
   return (
     <div>
-      <CreatePostModal />
+      <CreateCertModal />
     </div>
   );
 };
 
-export default NewPost;
+export default NewCert;
