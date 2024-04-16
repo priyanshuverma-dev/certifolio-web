@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import db from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
@@ -18,11 +18,17 @@ export async function GET() {
         id: true,
         name: true,
         image: true,
+        username: true,
         Certificates: {
           select: {
             id: true,
             cid: true,
             size: true,
+            description: true,
+            issuer: true,
+            verifyUrl: true,
+            pinned: true,
+            category: true,
             title: true,
             createdAt: true,
           },

@@ -1,5 +1,6 @@
 import AddCredentialSection from "@/components/add-credential-section";
 import CenterContainer from "@/components/center-container";
+import FeedSection from "@/components/feed-section";
 import MainHeader from "@/components/main/header";
 import UserProfile from "@/components/main/user-profile";
 import { Separator } from "@/components/ui/separator";
@@ -12,8 +13,8 @@ export default function Home() {
         <Separator />
         <UserProfile />
         <AddCredentialSection />
-        {/* <Separator /> */}
-        {/* <FeedSection /> */}
+        <Separator />
+        <FeedSection />
       </div>
     </CenterContainer>
   );
