@@ -7,7 +7,7 @@ const AddCredentialSection = () => {
     <div className="flex items-center py-2">
       <Link
         className={cn(buttonVariants({ variant: "blue" }), "w-full")}
-        href={"/new"}
+        href={"/cert/new"}
       >
         Mint Certificate
       </Link>

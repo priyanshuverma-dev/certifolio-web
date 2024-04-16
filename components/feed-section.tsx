@@ -86,7 +86,7 @@ const FeedSection = () => {
           <div className="flex items-center justify-between p-2">
             View NFT
             <Link
-              href={`/view?cid=${d.cid}`}
+              href={`/cert?cid=${d.cid}`}
               className={cn(
                 buttonVariants({ variant: "default", size: "icon" })
               )}
