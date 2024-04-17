@@ -14,33 +14,43 @@ export async function GET() {
       where: {
         email: session.user!.email!,
       },
-      select: {
-        id: true,
-        name: true,
-        image: true,
-        username: true,
-        Certificates: {
-          select: {
-            id: true,
-            cid: true,
-            size: true,
-            description: true,
-            issuer: true,
-            verifyUrl: true,
-            pinned: true,
-            category: true,
-            title: true,
-            createdAt: true,
-          },
-        },
-      },
     });
 
     if (!user) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 400 });
     }
 
-    const payload = user.Certificates;
+    const certificates = await db.certificate.findMany({
+      where: {
+        userId: user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        cid: true,
+        title: true,
+        description: true,
+        category: true,
+        credentialId: true,
+        issuer: true,
+        isPublic: true,
+        pinned: true,
+        verifyUrl: true,
+        createdAt: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            certificatesCategories: true,
+          },
+        },
+      },
+    });
+
+    const payload = certificates;
 
     return NextResponse.json({
       payload,

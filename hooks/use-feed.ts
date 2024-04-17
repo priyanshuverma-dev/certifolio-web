@@ -1,6 +1,5 @@
 "use client";
 
-import { Certificate } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 
 const useFeeds = () => {

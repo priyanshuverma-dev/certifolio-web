@@ -38,6 +38,20 @@ type Nft = {
   };
 };
 
+type Certificate = {
+  id: string;
+  cid: string;
+  size: number;
+  description: string;
+  issuer: string;
+  verifyUrl: string;
+  pinned: boolean;
+  category: string;
+  title: string;
+  createdAt: Date;
+  user: User;
+};
+
 type User = {
   id: string;
   name: string;

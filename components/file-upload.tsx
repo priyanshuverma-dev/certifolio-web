@@ -22,7 +22,12 @@ const FileUpload = ({
     const imageUrl = URL.createObjectURL(value);
     return (
       <AspectRatio ratio={16 / 9}>
-        <Image fill src={imageUrl} alt="Upload" className="rounded-md" />
+        <Image
+          fill
+          className="rounded-lg !w-full !h-full !object-contain"
+          src={imageUrl}
+          alt="Upload"
+        />
         <button
           disabled={disabled}
           onClick={() => {

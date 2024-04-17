@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Rubik, DM_Sans } from "next/font/google";
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster";
 import QueryProvider from "@/providers/query";
 import { cn } from "@/lib/utils";
 
-const inter = Rubik({ subsets: ["latin"] });
+const fonts = DM_Sans({ subsets: ["latin"] });
 
 const title =
   "CertiFolio - Showcase Your Certificates and Achievements on IPFS";
@@ -50,7 +50,7 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
-            inter.className,
+            fonts.className,
             "bg-gradient-to-r dark:from-slate-900 dark:to-stone-800 from-slate-50 to-stone-200"
           )}
         >
