@@ -119,7 +119,9 @@ const CreateCertModal = () => {
       });
 
       const savedData = await saveRes.json();
-      if (res.status !== 200) throw new Error(savedData.message);
+
+      if (saveRes.status != 200) throw new Error(savedData.message);
+
       toast({
         title: `Success: ${savedData.message}`,
         description: "Minted but it will take some time to sync.",
