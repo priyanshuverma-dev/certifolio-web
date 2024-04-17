@@ -22,11 +22,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogCancel,
+  AlertDialogFooter,
+  AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 
 import FileUpload from "../file-upload";
 import { NFT_ENDPOINT, NFT_STORAGE_TOKEN } from "@/lib/ipfs";
 import { X } from "lucide-react";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 const formSchema = z.object({
   title: z.string().min(3),
@@ -48,16 +51,17 @@ const formSchema = z.object({
   ),
 });
 
+const DetailsType = z.enum(["basic", "optional"]);
+
+type DetailsControl = {
+  basicDetailsIsOpen: boolean;
+  optionalDetailsIsOpen: boolean;
+};
+
 const CreateCertModal = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = React.useState(false);
-
-  const handleOnOpenChange = (open: boolean) => {
-    if (!open) {
-      router.back();
-    }
-  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -133,7 +137,7 @@ const CreateCertModal = () => {
   }
 
   return (
-    <AlertDialog open onOpenChange={handleOnOpenChange}>
+    <AlertDialog open onOpenChange={(open) => !open && router.back()}>
       <AlertDialogContent>
         <AlertDialogHeader className="flex justify-between items-center flex-row">
           <AlertDialogTitle>Mint new</AlertDialogTitle>
@@ -146,74 +150,36 @@ const CreateCertModal = () => {
           </AlertDialogCancel>
         </AlertDialogHeader>
         <AlertDialogDescription className="!text-left">
-          <div className="p-2">
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
-              >
-                <FormField
-                  disabled={loading}
-                  control={form.control}
-                  name="image"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          disabled={loading}
-                          onChange={field.onChange}
-                          value={field.value}
-                        >
-                          <Input
-                            type="file"
-                            accept="image/*"
-                            className="w-min"
-                            multiple={false}
-                            disabled={loading}
-                            onChange={handleImageChange}
-                          />
-                        </FileUpload>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  disabled={loading}
-                  control={form.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Certificate Title</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Data Science Certificate"
-                          {...field}
-                        />
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <details>
-                  <summary className="cursor-pointer">
-                    <span>
-                      More Options <span className="text-green-500">(new)</span>
-                    </span>
-                  </summary>
+          <ScrollArea className="py-2 px-4 h-96 overflow-y-auto scroll-smooth">
+            <ScrollBar />
+            <div>
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-8"
+                >
                   <FormField
                     disabled={loading}
                     control={form.control}
-                    name="issuer"
+                    name="image"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Issuer</FormLabel>
-
                         <FormControl>
-                          <Input placeholder="Ex. Google Cloud" {...field} />
+                          <FileUpload
+                            disabled={loading}
+                            onChange={field.onChange}
+                            value={field.value}
+                          >
+                            <Input
+                              type="file"
+                              accept="image/*"
+                              className="w-min"
+                              multiple={false}
+                              disabled={loading}
+                              onChange={handleImageChange}
+                            />
+                          </FileUpload>
                         </FormControl>
-
                         <FormMessage />
                       </FormItem>
                     )}
@@ -221,14 +187,13 @@ const CreateCertModal = () => {
                   <FormField
                     disabled={loading}
                     control={form.control}
-                    name="verifyUrl"
+                    name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Verify URL</FormLabel>
-
+                        <FormLabel>Certificate Title</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="https://verify.example.com/123"
+                            placeholder="Data Science Certificate"
                             {...field}
                           />
                         </FormControl>
@@ -237,34 +202,75 @@ const CreateCertModal = () => {
                       </FormItem>
                     )}
                   />
-                  <FormField
+
+                  <details>
+                    <summary className="text-lg font-semibold">
+                      Additional Details
+                    </summary>
+                    <FormField
+                      disabled={loading}
+                      control={form.control}
+                      name="issuer"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Issuer</FormLabel>
+
+                          <FormControl>
+                            <Input placeholder="Ex. Google Cloud" {...field} />
+                          </FormControl>
+
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      disabled={loading}
+                      control={form.control}
+                      name="verifyUrl"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Verify URL</FormLabel>
+
+                          <FormControl>
+                            <Input
+                              placeholder="https://verify.example.com/123"
+                              {...field}
+                            />
+                          </FormControl>
+
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      disabled={loading}
+                      control={form.control}
+                      name="description"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Description</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Cert is about.." {...field} />
+                          </FormControl>
+
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </details>
+
+                  <Button
                     disabled={loading}
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Description</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Cert is about.." {...field} />
-                        </FormControl>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </details>
-
-                <Button
-                  disabled={loading}
-                  type="submit"
-                  variant={"blue"}
-                  className="w-full"
-                >
-                  {loading ? "Minting..." : "Mint now"}
-                </Button>
-              </form>
-            </Form>
-          </div>
+                    type="submit"
+                    variant={"blue"}
+                    className="w-full"
+                  >
+                    {loading ? "Minting..." : "Mint now"}
+                  </Button>
+                </form>
+              </Form>
+            </div>
+          </ScrollArea>
         </AlertDialogDescription>
       </AlertDialogContent>
     </AlertDialog>

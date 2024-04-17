@@ -21,7 +21,7 @@ const FileUpload = ({
   if (value) {
     const imageUrl = URL.createObjectURL(value);
     return (
-      <AspectRatio ratio={3 / 2}>
+      <AspectRatio ratio={16 / 9}>
         <Image fill src={imageUrl} alt="Upload" className="rounded-md" />
         <button
           disabled={disabled}
@@ -38,7 +38,7 @@ const FileUpload = ({
   }
   return (
     <div>
-      <AspectRatio ratio={12 / 4}>
+      <AspectRatio ratio={12 / 3}>
         <div className="w-full h-full rounded-2xl border-dashed border-4 flex items-center justify-center text-gray-500 font-bold">
           {children}
         </div>
