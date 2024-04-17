@@ -7,7 +7,6 @@ import { ProfileDetails } from "@/components/profiles/details-card";
 import FeedLoading from "@/components/skeletons/feed-list";
 import UserProfileLoading from "@/components/skeletons/user-details";
 import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
 import useUsers from "@/hooks/use-users";
 import { notFound, useParams } from "next/navigation";
 
@@ -34,6 +33,7 @@ const Page = () => {
         <Separator />
         <ProfileDetails user={user!} />
         <Separator />
+
         <ProfileCertList user={user!} />
       </div>
     </CenterContainer>
