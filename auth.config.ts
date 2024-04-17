@@ -18,7 +18,7 @@ export default {
         name: profile.name,
         email: profile.email,
         image: profile.avatar_url,
-        username: profile.login.replaceAll(".", "_"),
+        username: profile.login.replaceAll("-", "_"),
         bio: profile.bio,
       }),
     }),
