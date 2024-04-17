@@ -21,6 +21,7 @@ export async function GET(
     const userCertificates = await db.certificate.count({
       where: {
         userId: user.id,
+        isPublic: true,
       },
     });
 

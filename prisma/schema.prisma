@@ -60,7 +60,7 @@ model Certificate {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   title        String
   description  String   @default("Good Certificate")
-  isPublic     Boolean  @default(false)
+  isPublic     Boolean  @default(true)
   credentialId String?
   category     String?
   pinned       Boolean  @default(false)

@@ -1,23 +1,13 @@
 "use client";
 
 import useCurrentUser from "@/hooks/use-current-user";
-import { Skeleton } from "../ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import UserProfileLoading from "../skeletons/user-details";
 
 const UserProfile = () => {
   const { data: user, isLoading, error } = useCurrentUser();
 
-  if (isLoading) {
-    return (
-      <div className="flex items-start justify-start py-2">
-        <Skeleton className="w-28 h-28 rounded-full mr-3 shadow" />
-        <div className="py-2">
-          <Skeleton className="w-40 h-6 mb-2" />
-          <Skeleton className="w-20 h-4" />
-        </div>
-      </div>
-    );
-  }
+  if (isLoading) return <UserProfileLoading />;
 
   if (error) {
     return (

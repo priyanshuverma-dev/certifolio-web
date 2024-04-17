@@ -29,11 +29,6 @@ export default auth((req) => {
     return;
   }
 
-  const isLandingPage = nextUrl.pathname === "/";
-  if (isLoggedIn && isLandingPage) {
-    return Response.redirect(new URL(`/main`, nextUrl));
-  }
-
   if (!isLoggedIn && !isPublicRoute) {
     let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) {

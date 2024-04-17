@@ -1,6 +1,6 @@
 import AddCredentialSection from "@/components/add-credential-section";
 import CenterContainer from "@/components/center-container";
-import FeedSection from "@/components/feed-section";
+import FeedSection from "@/components/main/feed-list";
 import MainHeader from "@/components/main/header";
 import UserProfile from "@/components/main/user-profile";
 import { Separator } from "@/components/ui/separator";

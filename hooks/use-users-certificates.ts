@@ -2,15 +2,15 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-const useFeeds = () => {
-  const { data, error, isLoading, status, refetch } = useQuery({
-    queryKey: ["feeds"],
+const useUsersCertificates = ({ username }: { username: string }) => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["certificates", username],
     queryFn: async () => {
       try {
-        const response = await fetch(`/api/feed`);
+        const response = await fetch(`/api/users/${username}/certificates`);
         const body = await response.json();
         if (response.status == 200) {
-          return body.payload as Certificate[];
+          return body as Certificate[];
         }
         if (response.status == 404) {
           return [] as Certificate[];
@@ -27,9 +27,7 @@ const useFeeds = () => {
     data,
     error,
     isLoading,
-    status,
-    refetch,
   };
 };
 
-export default useFeeds;
+export default useUsersCertificates;
