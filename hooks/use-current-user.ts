@@ -1,11 +1,18 @@
 "use client";
 
+import { useCurrentUserState } from "@/store/user-state";
 import { useQuery } from "@tanstack/react-query";
 
 const useCurrentUser = () => {
+  const userState = useCurrentUserState();
+
+  // Use this flag to determine whether to fetch data
+  const shouldFetch = !userState.user;
+
   const { data, error, isLoading, status, refetch } = useQuery({
     queryKey: ["me"],
     refetchIntervalInBackground: true,
+    enabled: shouldFetch,
     queryFn: async () => {
       try {
         const response = await fetch(`/api/auth/me`);
@@ -21,10 +28,14 @@ const useCurrentUser = () => {
     },
   });
 
+  if (data && !userState.user) {
+    userState.setUser(data);
+  }
+
   return {
-    data,
+    data: userState.user || data,
     error,
-    isLoading,
+    isLoading: isLoading && shouldFetch,
     status,
     refetch,
   };

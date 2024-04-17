@@ -48,4 +48,5 @@ type User = {
   image: string | null;
   createdAt: Date;
   updatedAt: Date;
+  message?: string;
 };
