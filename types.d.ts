@@ -63,4 +63,5 @@ type User = {
   createdAt: Date;
   updatedAt: Date;
   message?: string;
+  totalCertificates?: number;
 };
