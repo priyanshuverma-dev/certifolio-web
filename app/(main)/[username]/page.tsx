@@ -8,10 +8,14 @@ import FeedLoading from "@/components/skeletons/feed-list";
 import UserProfileLoading from "@/components/skeletons/user-details";
 import { Separator } from "@/components/ui/separator";
 import useUsers from "@/hooks/use-users";
+import { useSession } from "next-auth/react";
 import { notFound, useParams } from "next/navigation";
 
 const Page = () => {
   const params = useParams();
+
+  const session = useSession();
+
   const {
     data: user,
     error,
@@ -29,7 +33,10 @@ const Page = () => {
   return (
     <CenterContainer>
       <div className="flex flex-col mx-2 h-full">
-        <MainHeader showSettings={false} />
+        <MainHeader
+          hideSettings
+          showGetHandle={session.status == "unauthenticated"}
+        />
         <Separator />
         <ProfileDetails user={user!} />
         <Separator />
@@ -46,7 +53,7 @@ const Loading = () => {
   return (
     <CenterContainer>
       <div className="flex flex-col mx-2 h-full">
-        <MainHeader showSettings={false} />
+        <MainHeader hideSettings />
         <Separator />
         <UserProfileLoading />
         <Separator />

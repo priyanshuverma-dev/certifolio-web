@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import QueryProvider from "@/providers/query";
 import { cn } from "@/lib/utils";
+import ModalsProvider from "@/providers/modals";
 
 const fonts = DM_Sans({ subsets: ["latin"] });
 
@@ -64,6 +65,7 @@ export default async function RootLayout({
               {children}
               {modal}
               <Toaster />
+              <ModalsProvider />
             </ThemeProvider>
           </QueryProvider>
           {/* // !TODO: <Analytics /> */}

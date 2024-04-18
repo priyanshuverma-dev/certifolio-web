@@ -1,34 +1,39 @@
+import { auth } from "@/auth";
 import { Settings } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 type Props = {
-  showSettings?: boolean;
+  hideSettings?: boolean;
+  showGetHandle?: boolean;
 };
 
-const MainHeader = ({ showSettings = true }: Props) => {
+const MainHeader = ({ hideSettings = false, showGetHandle = false }: Props) => {
   return (
     <header className="flex items-center justify-between p-4">
-      <aside className="flex items-center gap-[2px]">
-        <p className="text-3xl font-bold">Certi</p>
-        <Image
-          src="/images/f.png"
-          alt="f"
-          width={15}
-          height={15}
-          className="shadow-sm"
-        />
-        <p className="text-3xl font-bold">lio</p>
-      </aside>
+      <Link href="/main">
+        <aside className="flex items-center gap-[2px]">
+          <p className="text-3xl font-bold">Certi</p>
+          <Image
+            src="/images/f.png"
+            alt="f"
+            width={15}
+            height={15}
+            className="shadow-sm"
+          />
+          <p className="text-3xl font-bold">lio</p>
+        </aside>
+      </Link>
       <div>
-        {showSettings ? (
+        {!hideSettings && (
           <Link href={"/main/settings"}>
             <Settings
               size={24}
               className="hover:text-gray-100 transition-colors"
             />
           </Link>
-        ) : (
+        )}
+        {showGetHandle && (
           <Link
             href="/main"
             className="relative inline-flex h-10 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"

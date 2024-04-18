@@ -1,10 +1,30 @@
-import React from "react";
+import CenterContainer from "@/components/center-container";
+import MainHeader from "@/components/main/header";
+import AccountSettingsForm from "@/components/settings/account-form";
+import ProfileSettingsForm from "@/components/settings/profile-form";
+import SelectMenu from "@/components/settings/select-menu";
 
-const Page = () => {
+const Page = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
+  const selected = searchParams.selected || "Profile";
+
   return (
-    <div className="flex h-screen w-screen justify-center items-center">
-      Settings In Progress
-    </div>
+    <CenterContainer>
+      <MainHeader hideSettings />
+      <div className="flex justify-center flex-col">
+        <div className="flex items-center">
+          <SelectMenu />
+        </div>
+        <div className="m-2 py-3">
+          {selected === "Profile" && <ProfileSettingsForm />}
+          {selected === "Account" && <AccountSettingsForm />}
+          {selected === "Theme" && <div>Theme</div>}
+        </div>
+      </div>
+    </CenterContainer>
   );
 };
 
