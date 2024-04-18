@@ -35,10 +35,6 @@ export default auth((req) => {
       callbackUrl += nextUrl.search;
     }
 
-    if (callbackUrl === "/auth/logout") {
-      callbackUrl = "/";
-    }
-
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
     return Response.redirect(
