@@ -4,23 +4,24 @@ import Github from "next-auth/providers/github";
 import type { NextAuthConfig } from "next-auth";
 
 export default {
+  events: {},
   providers: [
     Google({
       profile: (profile) => ({
         name: profile.name,
         email: profile.email,
         image: profile.picture,
-        username: profile.email.split("@")[0].replaceAll(".", "_"),
       }),
+      allowDangerousEmailAccountLinking: true,
     }),
     Github({
       profile: (profile) => ({
         name: profile.name,
         email: profile.email,
         image: profile.avatar_url,
-        username: profile.login.replaceAll("-", "_"),
         bio: profile.bio,
       }),
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
 } satisfies NextAuthConfig;

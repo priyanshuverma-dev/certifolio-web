@@ -39,7 +39,6 @@ const ProfileSettingsForm = ({
   userData,
 }: {
   userData: {
-    status: "success" | "error" | "pending";
     data?: User;
     error: any;
   };
@@ -56,7 +55,7 @@ const ProfileSettingsForm = ({
     },
   });
 
-  if (userData.status == "success" && form.getValues().name === "") {
+  if (form.getValues().name === "") {
     form.reset({
       image: userData?.data!.image || "",
       name: userData?.data!.name || "",

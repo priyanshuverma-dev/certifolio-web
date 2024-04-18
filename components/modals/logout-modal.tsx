@@ -8,10 +8,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { signOut } from "next-auth/react";
 
 import { useToast } from "../ui/use-toast";
 import { logoutModalState } from "@/store/logout-modal-state";
+import { signOut } from "next-auth/react";
 
 const LogoutConfirmationModal = () => {
   const modal = logoutModalState();

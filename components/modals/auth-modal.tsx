@@ -10,10 +10,10 @@ import {
 } from "../ui/dialog";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
-import { signIn } from "next-auth/react";
 import { useToast } from "../ui/use-toast";
 import { Icons } from "../icons";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const AuthModal = () => {
   const [isLoading, setIsLoading] = useState(false);

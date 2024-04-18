@@ -13,6 +13,7 @@ const FormSection = (props: Props) => {
 
   const searchParams = useSearchParams();
   const selected = searchParams.get("selected") || "Profile";
+  console.log(data);
 
   if (isLoading) {
     return (
@@ -40,7 +41,6 @@ const FormSection = (props: Props) => {
           userData={{
             data,
             error,
-            status,
           }}
         />
       )}
@@ -49,7 +49,6 @@ const FormSection = (props: Props) => {
           userData={{
             data,
             error,
-            status,
           }}
         />
       )}

@@ -11,7 +11,7 @@ export const {
   callbacks: {
     session({ session, token }) {
       session.user.username = token.username as string;
-
+      session.user.lastUsernameChangedAt = token.lastUsernameChangedAt as any;
       return session;
     },
     async jwt({ token }) {
@@ -26,6 +26,7 @@ export const {
       token.sub = existingUser.id;
       token.username = existingUser.username;
       token.emailVerified = existingUser.emailVerified;
+      token.lastUsernameChangedAt = existingUser.lastUsernameChangedAt;
 
       return token;
     },
@@ -37,7 +38,7 @@ export const {
   secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/auth",
-    signOut: "/auth",
+    error: "/auth",
   },
 
   ...authConfig,

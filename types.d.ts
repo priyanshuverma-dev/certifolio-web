@@ -65,4 +65,5 @@ type User = {
   message?: string;
   totalCertificates?: number;
   private: boolean;
+  lastUsernameChangedAt: Date | null;
 };

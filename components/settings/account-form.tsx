@@ -42,7 +42,6 @@ const AccountSettingsForm = ({
   userData,
 }: {
   userData: {
-    status: "success" | "error" | "pending";
     data?: User;
     error: any;
   };
@@ -61,10 +60,13 @@ const AccountSettingsForm = ({
     },
   });
 
-  if (userData.status == "success" && form.getValues().username === "") {
+  if (form.getValues().username === "") {
     form.reset({
       email: userData?.data!.email || "",
-      username: `${userData?.data!.username || ""}`,
+      username:
+        userData?.data!.lastUsernameChangedAt == null
+          ? "Set your username"
+          : userData?.data!.username,
     });
   }
 
@@ -88,7 +90,9 @@ const AccountSettingsForm = ({
                         modal.onOpen(
                           "username",
                           FormType.Account,
-                          userData.data?.username
+                          userData?.data!.lastUsernameChangedAt == null
+                            ? ""
+                            : userData?.data!.username
                         )
                       }
                     >

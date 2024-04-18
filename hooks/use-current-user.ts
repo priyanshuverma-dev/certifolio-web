@@ -11,7 +11,6 @@ const useCurrentUser = () => {
 
   const { data, error, isLoading, status, refetch } = useQuery({
     queryKey: ["me"],
-    refetchIntervalInBackground: true,
     enabled: shouldFetch,
     queryFn: async () => {
       try {
