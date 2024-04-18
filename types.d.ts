@@ -64,4 +64,5 @@ type User = {
   updatedAt: Date;
   message?: string;
   totalCertificates?: number;
+  private: boolean;
 };

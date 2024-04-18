@@ -18,7 +18,8 @@ import useCurrentUser from "@/hooks/use-current-user";
 import { Textarea } from "../ui/textarea";
 import { AiTwotoneEdit } from "react-icons/ai";
 import Image from "next/image";
-import { settingsModalState } from "@/store/settings-form-state";
+import { FormType, settingsModalState } from "@/store/settings-form-state";
+import { Switch } from "../ui/switch";
 
 const formSchema = z.object({
   image: z.string(),
@@ -31,10 +32,18 @@ const formSchema = z.object({
       message: "Bio must be less than 256 characters.",
     })
     .optional(),
+  private: z.boolean().default(false).optional(),
 });
 
-const ProfileSettingsForm = () => {
-  const userData = useCurrentUser();
+const ProfileSettingsForm = ({
+  userData,
+}: {
+  userData: {
+    status: "success" | "error" | "pending";
+    data?: User;
+    error: any;
+  };
+}) => {
   const modal = settingsModalState();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,6 +61,7 @@ const ProfileSettingsForm = () => {
       image: userData?.data!.image || "",
       name: userData?.data!.name || "",
       bio: userData?.data!.bio || "",
+      private: userData?.data!.private,
     });
   }
 
@@ -74,7 +84,6 @@ const ProfileSettingsForm = () => {
                     className="rounded-full"
                   />
                   <button
-                    onClick={() => modal.onOpen(field.name, field.value)}
                     disabled
                     className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
                     type="button"
@@ -100,7 +109,9 @@ const ProfileSettingsForm = () => {
                   <button
                     type="button"
                     className="absolute inset-y-0 right-0 flex items-center px-2"
-                    onClick={() => modal.onOpen(field.name, field.value)}
+                    onClick={() =>
+                      modal.onOpen(field.name, FormType.Profile, field.value)
+                    }
                   >
                     <AiTwotoneEdit />
                   </button>
@@ -123,7 +134,9 @@ const ProfileSettingsForm = () => {
                   <button
                     type="button"
                     className="absolute inset-y-0 right-0 flex items-center px-2"
-                    onClick={() => modal.onOpen(field.name, field.value)}
+                    onClick={() =>
+                      modal.onOpen(field.name, FormType.Profile, field.value)
+                    }
                   >
                     <AiTwotoneEdit />
                   </button>
@@ -131,6 +144,28 @@ const ProfileSettingsForm = () => {
               </FormControl>
               <FormDescription>This is your public bio.</FormDescription>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="private"
+          render={({ field }) => (
+            <FormItem
+              onClick={() =>
+                modal.onOpen(field.name, FormType.Profile, `${field.value}`)
+              }
+              className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm"
+            >
+              <div className="space-y-0.5">
+                <FormLabel>Private Profile</FormLabel>
+                <FormDescription>
+                  Private your profile from public view.
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch disabled checked={field.value} />
+              </FormControl>
             </FormItem>
           )}
         />

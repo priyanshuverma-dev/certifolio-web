@@ -44,6 +44,7 @@ model User {
   id                     String        @id @default(auto()) @map("_id") @db.ObjectId
   name                   String?
   username               String        @unique
+  private                Boolean       @default(false)
   email                  String?       @unique
   bio                    String        @default("I am a developer")
   emailVerified          DateTime?

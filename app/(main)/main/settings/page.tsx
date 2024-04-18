@@ -1,8 +1,8 @@
 import CenterContainer from "@/components/center-container";
 import MainHeader from "@/components/main/header";
-import AccountSettingsForm from "@/components/settings/account-form";
-import ProfileSettingsForm from "@/components/settings/profile-form";
+import FormSection from "@/components/settings/form-section";
 import SelectMenu from "@/components/settings/select-menu";
+import Link from "next/link";
 
 const Page = ({
   searchParams,
@@ -18,10 +18,13 @@ const Page = ({
         <div className="flex items-center">
           <SelectMenu />
         </div>
-        <div className="m-2 py-3">
-          {selected === "Profile" && <ProfileSettingsForm />}
-          {selected === "Account" && <AccountSettingsForm />}
-          {selected === "Theme" && <div>Theme</div>}
+        <FormSection />
+        <div>
+          <Link href={"/main"}>
+            <p className="text-center text-xs text-muted-foreground underline">
+              Back to Home
+            </p>
+          </Link>
         </div>
       </div>
     </CenterContainer>

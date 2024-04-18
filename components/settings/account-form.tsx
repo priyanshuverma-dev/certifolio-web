@@ -8,18 +8,18 @@ import { Input } from "../ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { MdOutlineLogout } from "react-icons/md";
 import useCurrentUser from "@/hooks/use-current-user";
-import { Textarea } from "../ui/textarea";
 import { AiTwotoneEdit } from "react-icons/ai";
-import Image from "next/image";
-import { settingsModalState } from "@/store/settings-form-state";
-import Link from "next/link";
+import { FormType, settingsModalState } from "@/store/settings-form-state";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { logoutModalState } from "@/store/logout-modal-state";
 
 const formSchema = z.object({
   username: z
@@ -38,8 +38,16 @@ const formSchema = z.object({
   }),
 });
 
-const AccountSettingsForm = () => {
-  const userData = useCurrentUser();
+const AccountSettingsForm = ({
+  userData,
+}: {
+  userData: {
+    status: "success" | "error" | "pending";
+    data?: User;
+    error: any;
+  };
+}) => {
+  const logoutModal = logoutModalState();
 
   const modal = settingsModalState();
 
@@ -61,49 +69,66 @@ const AccountSettingsForm = () => {
   }
 
   return (
-    <Form {...form}>
-      <form className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <div className="relative">
-                  <Input placeholder="loading" {...field} disabled />
-                  <button
-                    type="button"
-                    className="absolute inset-y-0 right-0 flex items-center px-2"
-                    onClick={() =>
-                      modal.onOpen("username", userData.data?.username)
-                    }
-                  >
-                    <AiTwotoneEdit />
-                  </button>
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <div className="relative">
-                  <Input placeholder="loading" {...field} disabled />
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
+    <div className="flex flex-col">
+      <Form {...form}>
+        <form className="space-y-8">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input placeholder="loading" {...field} disabled />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 right-0 flex items-center px-2"
+                      onClick={() =>
+                        modal.onOpen(
+                          "username",
+                          FormType.Account,
+                          userData.data?.username
+                        )
+                      }
+                    >
+                      <AiTwotoneEdit />
+                    </button>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input placeholder="loading" {...field} disabled />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
+      <div className="flex justify-between border-2 border-destructive/55 rounded-md p-2 my-4">
+        <div className="space-y-0.5 flex flex-col">
+          <Label className="text-destructive font-bold leading-6">Logout</Label>
+          <p className="text-destructive/75  text-xs">
+            Logout from your account.
+          </p>
+        </div>
+        <Button variant={"destructive"} onClick={() => logoutModal.onOpen()}>
+          <MdOutlineLogout />
+        </Button>
+      </div>
+    </div>
   );
 };
 
