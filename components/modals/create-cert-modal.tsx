@@ -14,7 +14,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -30,6 +29,7 @@ import FileUpload from "../file-upload";
 import { NFT_ENDPOINT, NFT_STORAGE_TOKEN } from "@/lib/ipfs";
 import { X } from "lucide-react";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   title: z.string().min(3),
@@ -60,7 +60,6 @@ type DetailsControl = {
 
 const CreateCertModal = () => {
   const router = useRouter();
-  const { toast } = useToast();
   const [loading, setLoading] = React.useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -122,17 +121,10 @@ const CreateCertModal = () => {
 
       if (saveRes.status != 200) throw new Error(savedData.message);
 
-      toast({
-        title: `Success: ${savedData.message}`,
-        description: "Minted but it will take some time to sync.",
-      });
+      toast.success(`Success: Minted but it will take some time to sync`);
       router.back();
     } catch (error: any) {
-      toast({
-        title: "Error: Minting Failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      toast.error(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

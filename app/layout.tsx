@@ -7,7 +7,7 @@ import NextTopLoader from "nextjs-toploader";
 import AuthProvider from "@/providers/auth-provider";
 import { auth } from "@/auth";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "react-hot-toast";
 import QueryProvider from "@/providers/query";
 import { cn } from "@/lib/utils";
 import ModalsProvider from "@/providers/modals";

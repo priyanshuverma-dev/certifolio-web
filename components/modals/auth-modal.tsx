@@ -10,15 +10,14 @@ import {
 } from "../ui/dialog";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
-import { useToast } from "../ui/use-toast";
 import { Icons } from "../icons";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const AuthModal = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { toast } = useToast();
   const router = useRouter();
   const r = usePathname();
 
@@ -37,10 +36,7 @@ const AuthModal = () => {
       });
       if (res?.error) throw new Error(res.error);
       if (res?.ok) {
-        toast({
-          title: `Success: Authenticated`,
-          description: "Continue to home",
-        });
+        toast.success(`Success: Authenticated`);
         if (callback) {
           router.push(callback);
         } else {
@@ -49,10 +45,7 @@ const AuthModal = () => {
       }
     } catch (error: any) {
       console.log(error);
-      toast({
-        title: `Error: Authentication Failed`,
-        description: error.message,
-      });
+      toast.error(`Error: ${error.message}`);
     } finally {
       setIsLoading(false);
     }

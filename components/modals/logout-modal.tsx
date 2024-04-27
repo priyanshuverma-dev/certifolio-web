@@ -9,13 +9,12 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import { useToast } from "../ui/use-toast";
 import { logoutModalState } from "@/store/logout-modal-state";
 import { signOut } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const LogoutConfirmationModal = () => {
   const modal = logoutModalState();
-  const { toast } = useToast();
 
   return (
     <AlertDialog
@@ -38,10 +37,7 @@ const LogoutConfirmationModal = () => {
               signOut({
                 callbackUrl: "/",
               });
-              toast({
-                title: "Logged out",
-                description: "You have been logged out",
-              });
+              toast("Logged out");
             }}
           >
             Logout

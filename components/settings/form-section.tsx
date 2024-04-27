@@ -13,7 +13,6 @@ const FormSection = (props: Props) => {
 
   const searchParams = useSearchParams();
   const selected = searchParams.get("selected") || "Profile";
-  console.log(data);
 
   if (isLoading) {
     return (

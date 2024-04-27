@@ -49,7 +49,7 @@ function SelectMenu({}: Props) {
           defaultValue={SettingsType.Values.Profile}
         />
       </SelectTrigger>
-      <SelectContent className="">
+      <SelectContent>
         {SettingsType.options.map((item) => (
           <SelectItem key={item} value={item}>
             {item}

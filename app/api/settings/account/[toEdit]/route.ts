@@ -50,9 +50,7 @@ export async function POST(
         ) {
           return NextResponse.json(
             { message: "Username update is only allowed once every 7 days" },
-            {
-              status: 403,
-            }
+            { status: 403 }
           );
         }
       }

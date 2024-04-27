@@ -15,9 +15,9 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { useToast } from "../ui/use-toast";
 import { settingsModalState } from "@/store/settings-form-state";
 import { Switch } from "../ui/switch";
+import toast from "react-hot-toast";
 
 const SettingsFormModal = () => {
   const modal = settingsModalState();
@@ -26,8 +26,6 @@ const SettingsFormModal = () => {
 
   const [value, setValue] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const { toast } = useToast();
 
   const onSubmit = async () => {
     try {
@@ -44,19 +42,11 @@ const SettingsFormModal = () => {
       const data = await res.json();
       if (res.status != 200) throw new Error(data.message);
 
-      toast({
-        title: `${toEdit} edited successfully`,
-        description: `Your ${toEdit} changes will be reflected soon.`,
-        variant: "default",
-      });
+      toast.success(`${toEdit} edited successfully. reflect soon`);
 
       modal.onClose();
     } catch (error: any) {
-      toast({
-        title: `Error in editing ${toEdit}`,
-        description: error.message,
-        variant: "destructive",
-      });
+      toast.error(`Error: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -107,6 +97,9 @@ const SettingsFormModal = () => {
                 disabled={isLoading}
                 onChange={(e) => setValue(e.target.value)}
                 defaultValue={prevValue}
+                name={toEdit}
+                type="text"
+                id={toEdit}
               />
             </>
           )}

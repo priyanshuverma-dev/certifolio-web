@@ -12,7 +12,6 @@ export default {
         email: profile.email,
         image: profile.picture,
       }),
-      allowDangerousEmailAccountLinking: true,
     }),
     Github({
       profile: (profile) => ({
@@ -21,7 +20,6 @@ export default {
         image: profile.avatar_url,
         bio: profile.bio,
       }),
-      allowDangerousEmailAccountLinking: true,
     }),
   ],
 } satisfies NextAuthConfig;

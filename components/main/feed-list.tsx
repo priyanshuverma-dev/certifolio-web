@@ -26,10 +26,17 @@ const FeedSection = () => {
     );
   }
 
+  const pinnedPosts = data?.filter((cert) => cert.pinned) ?? [];
+  const otherPosts = data?.filter((cert) => !cert.pinned) ?? [];
+
+  const certList = [...pinnedPosts, ...otherPosts];
+
   return (
     <div className="py-2 h-full space-y-2">
-      {data?.map((cert) => (
-        <CertCard cert={cert} key={cert.id} />
+      {certList.map((cert) => (
+        <>
+          <CertCard cert={cert} key={cert.id} />
+        </>
       ))}
     </div>
   );
