@@ -1,6 +1,5 @@
 "use client";
 
-import { Certificate } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 
 const useFeeds = () => {
@@ -12,6 +11,9 @@ const useFeeds = () => {
         const body = await response.json();
         if (response.status == 200) {
           return body.payload as Certificate[];
+        }
+        if (response.status == 404) {
+          return [] as Certificate[];
         } else {
           throw new Error(body.message);
         }

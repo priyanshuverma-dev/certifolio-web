@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import db from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
@@ -14,27 +14,50 @@ export async function GET() {
       where: {
         email: session.user!.email!,
       },
-      select: {
-        id: true,
-        name: true,
-        image: true,
-        Certificates: {
-          select: {
-            id: true,
-            cid: true,
-            size: true,
-            title: true,
-            createdAt: true,
-          },
-        },
-      },
     });
 
     if (!user) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 400 });
     }
 
-    const payload = user.Certificates;
+    const certificates = await db.certificate.findMany({
+      where: {
+        userId: user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        cid: true,
+        title: true,
+        description: true,
+        category: true,
+        credentialId: true,
+        issuer: true,
+        isPublic: true,
+        pinned: true,
+        verifyUrl: true,
+        createdAt: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            certificatesCategories: true,
+          },
+        },
+      },
+    });
+
+    if (certificates.length == 0) {
+      return NextResponse.json(
+        { message: "No certificates found" },
+        { status: 404 }
+      );
+    }
+
+    const payload = certificates;
 
     return NextResponse.json({
       payload,

@@ -3,7 +3,15 @@
  * These routes do not require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = ["/view"];
+export const publicRoutes: string[] = [
+  "/cert",
+  "/",
+  "/terms",
+  "/privacy",
+  "/about",
+  "/contact",
+  "/howitworks",
+];
 
 /**
  * An array of routes that are used for authentication
@@ -23,4 +31,4 @@ export const apiAuthPrefix: string = "/api/auth";
  * The default redirect path after logging in
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT: string = "/";
+export const DEFAULT_LOGIN_REDIRECT: string = "/main";

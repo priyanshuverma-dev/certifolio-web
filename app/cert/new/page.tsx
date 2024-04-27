@@ -1,8 +1,8 @@
 "use client";
-import CreatePostModal from "@/components/modals/create-post-modal";
+import CreateCertModal from "@/components/modals/create-cert-modal";
 import { useEffect, useState } from "react";
 
-const CreateProject = () => {
+const NewCert = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -15,9 +15,9 @@ const CreateProject = () => {
 
   return (
     <div>
-      <CreatePostModal />
+      <CreateCertModal />
     </div>
   );
 };
 
-export default CreateProject;
+export default NewCert;
