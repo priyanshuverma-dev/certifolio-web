@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 
 type Props = {
   cert: Certificate;
@@ -33,8 +34,10 @@ function ProfileCertCard({ cert }: Props) {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <img
-          className="rounded-lg w-full h-full !object-contain"
+        <Image
+          width={500}
+          height={500}
+          className="rounded-lg !w-full !h-full !object-contain"
           src={`https://gateway.pinata.cloud/ipfs/${cert.cid}`}
           alt={`${cert.title} by ${cert.issuer}`}
         />

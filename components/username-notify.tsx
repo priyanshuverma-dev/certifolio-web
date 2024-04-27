@@ -26,7 +26,7 @@ const UsernameNotify = async () => {
           </div>
           <div className="ml-3">
             <span className="text-sm leading-5 text-yellow-700">
-              You haven't set a username yet. You can set a username in your
+              You haven&#39t set a username yet. You can set a username in your
               profile{" "}
               <Link
                 href={"/main/settings?selected=Account"}
