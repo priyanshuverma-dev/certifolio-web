@@ -33,9 +33,14 @@ const ProfileCertList = ({ user }: Props) => {
     );
   }
 
+  const pinnedPosts = data?.filter((cert) => cert.pinned) ?? [];
+  const otherPosts = data?.filter((cert) => !cert.pinned) ?? [];
+
+  const certList = [...pinnedPosts, ...otherPosts];
+
   return (
     <div className="py-2 h-full space-y-2">
-      {data?.map((cert) => (
+      {certList.map((cert) => (
         <ProfileCertCard key={cert.id} cert={cert} />
       ))}
     </div>

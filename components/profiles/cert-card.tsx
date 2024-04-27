@@ -21,7 +21,7 @@ function ProfileCertCard({ cert }: Props) {
       <div>
         <div className="flex items-center justify-between py-2">
           <h4 className="scroll-m-20 text-xl font-semibold tracking-tight p-1">
-            {cert.title}
+            {cert.title} {cert.pinned && "📌"}
           </h4>
           <DropdownMenu>
             <DropdownMenuTrigger>
