@@ -7,10 +7,11 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
+import { getUserByUsername } from "./lib/db-functions";
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
+export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
@@ -30,6 +31,11 @@ export default auth((req) => {
   }
 
   if (!isLoggedIn && !isPublicRoute) {
+    const user = await getUserByUsername(nextUrl.pathname.replace("/", ""));
+    if (user) {
+      return;
+    }
+
     let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) {
       callbackUrl += nextUrl.search;

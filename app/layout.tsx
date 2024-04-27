@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Rubik, DM_Sans } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -68,7 +68,7 @@ export default async function RootLayout({
               <ModalsProvider />
             </ThemeProvider>
           </QueryProvider>
-          {/* // !TODO: <Analytics /> */}
+          <Analytics />
         </body>
       </html>
     </AuthProvider>
