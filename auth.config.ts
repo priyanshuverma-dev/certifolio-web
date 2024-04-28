@@ -6,20 +6,7 @@ import type { NextAuthConfig } from "next-auth";
 export default {
   events: {},
   providers: [
-    Google({
-      profile: (profile) => ({
-        name: profile.name,
-        email: profile.email,
-        image: profile.picture,
-      }),
-    }),
-    Github({
-      profile: (profile) => ({
-        name: profile.name,
-        email: profile.email,
-        image: profile.avatar_url,
-        bio: profile.bio,
-      }),
-    }),
+  Google,
+  Github
   ],
 } satisfies NextAuthConfig;
