@@ -25,10 +25,10 @@ export const ProfileDetails = ({ user }: Props) => {
       </div>
       <div>
         <p className="text-muted-foreground">
-          📅 Joined on {moment(user.createdAt).fromNow()}
+          📅 Joined on {moment(user?.createdAt).fromNow()}
         </p>
         <p className="text-muted-foreground leading-6">
-          Total Public Certificates: {user.totalCertificates}
+          Total Public Certificates: {user?.totalCertificates}
         </p>
       </div>
     </div>

@@ -8,6 +8,7 @@ import {
   publicRoutes,
 } from "@/routes";
 import { getUserByUsername } from "./lib/db-functions";
+import { BASE_API } from "./lib/utils";
 
 const { auth } = NextAuth(authConfig);
 
@@ -19,7 +20,7 @@ export default auth(async (req) => {
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
-  if (isApiAuthRoute) {
+  if (isApiAuthRoute || nextUrl.pathname.startsWith("/api/users")) {
     return;
   }
 
@@ -31,9 +32,13 @@ export default auth(async (req) => {
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-    const user = await getUserByUsername(nextUrl.pathname.replace("/", ""));
-    if (user) {
-      return;
+    const pathnames = nextUrl.pathname.split("/");
+    if (pathnames.length == 2) {
+      const username = pathnames[1];
+      const response = await fetch(`${BASE_API}/api/users/${username}`);
+      if (response.ok) {
+        return;
+      }
     }
 
     let callbackUrl = nextUrl.pathname;
