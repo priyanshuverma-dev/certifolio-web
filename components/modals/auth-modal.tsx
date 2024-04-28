@@ -25,7 +25,7 @@ const AuthModal = () => {
   const callback = searchParams.get("callbackUrl");
 
   const handleOnOpenChange = (open: boolean) => {
-    router.push("/");
+    router.back();
   };
 
   async function onLogin(provider: "github" | "google") {
