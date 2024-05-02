@@ -13,6 +13,7 @@ import {
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
+import { editCertModalState } from "@/store/edit-cert-modal-state";
 
 type Props = {
   cert: Certificate;
@@ -20,6 +21,7 @@ type Props = {
 
 function CertCard({ cert }: Props) {
   const qc = useQueryClient();
+  const editCertModal = editCertModalState();
   const handleDelete = async () => {};
   const handleCopyUrl = async () => {
     navigator.clipboard.writeText(
@@ -66,7 +68,7 @@ function CertCard({ cert }: Props) {
       toast.error(`Error: ${error.message}`);
     }
   };
-  const handleEdit = async () => {};
+  const handleEdit = () => editCertModal.onOpen();
 
   return (
     <div key={cert.id} className="border-2 rounded-xl p-2">
