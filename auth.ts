@@ -33,7 +33,7 @@ export const {
   },
   adapter: PrismaAdapter(db),
   debug: process.env.NODE_ENV === "development",
-  basePath: "/api/auth",
+  // basePath: "/api/auth",
   session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET,
   pages: {

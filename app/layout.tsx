@@ -15,13 +15,13 @@ import ModalsProvider from "@/providers/modals";
 const fonts = DM_Sans({ subsets: ["latin"] });
 
 const title =
-  "CertiFolio - Showcase Your Certificates and Achievements on IPFS";
+  "Certifolio - Showcase Your Certificates and Achievements on IPFS";
 const description =
-  "CertiFolio is a platform where users can securely upload, showcase, and verify their certificates and achievements on the InterPlanetary File System (IPFS).";
+  "Certifolio is a platform where users can securely upload, showcase, and verify their certificates and achievements on the InterPlanetary File System (IPFS).";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | CertiFolio",
+    template: "%s | Certifolio",
     default: title,
   },
   description: description,

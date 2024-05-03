@@ -105,7 +105,7 @@ const CreateCertModal = () => {
       const cid = data.value.cid;
       const size = data.value.size;
 
-      const saveRes = await fetch("/api/mint", {
+      const saveRes = await fetch("/api/cert/mint", {
         method: "POST",
         body: JSON.stringify({
           title: values.title,

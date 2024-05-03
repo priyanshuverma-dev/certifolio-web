@@ -11,7 +11,7 @@ export default async function Home() {
       <Intro />
       <Features />
       <Footer />
-      <BackgroundBeams />
+      {/* <BackgroundBeams /> */}
     </>
   );
 }

@@ -11,7 +11,6 @@ export const publicRoutes: string[] = [
   "/about",
   "/contact",
   "/howitworks",
-  "/api/users/(.*)",
 ];
 
 /**
