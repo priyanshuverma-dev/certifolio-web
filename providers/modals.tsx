@@ -1,5 +1,6 @@
 "use client";
 
+import EditCertModal from "@/components/modals/edit-cert-modal";
 import LogoutConfirmationModal from "@/components/modals/logout-modal";
 import SettingsFormModal from "@/components/modals/settings-form-modal";
 import React, { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ const ModalsProvider = () => {
     <>
       <LogoutConfirmationModal />
       <SettingsFormModal />
-      {/* <AccountEditModal /> */}
+      <EditCertModal />
     </>
   );
 };

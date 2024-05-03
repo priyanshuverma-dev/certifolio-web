@@ -68,7 +68,7 @@ function CertCard({ cert }: Props) {
       toast.error(`Error: ${error.message}`);
     }
   };
-  const handleEdit = () => editCertModal.onOpen();
+  const handleEdit = () => editCertModal.onOpen(cert);
 
   return (
     <div key={cert.id} className="border-2 rounded-xl p-2">
