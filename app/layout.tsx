@@ -30,7 +30,6 @@ export const metadata: Metadata = {
     description: description,
     type: "website",
     url: "https://certifolio.p7u.tech",
-    locale: 'en_US',
   },
   twitter: {
     title,

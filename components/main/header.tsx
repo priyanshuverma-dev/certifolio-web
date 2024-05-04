@@ -16,6 +16,8 @@ const MainHeader = ({ hideSettings = false, showGetHandle = false }: Props) => {
           <Image
             src="/images/f.png"
             alt="f"
+            is="p"
+            itemType="f"
             width={15}
             height={15}
             className="shadow-sm"
