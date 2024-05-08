@@ -24,7 +24,7 @@ CertiFolio is a platform where users can securely upload, showcase, and verify t
 
 Before you begin, ensure you have the following prerequisites:
 
-- [Node.js](https://nodejs.org/) (version X.X.X)
+- [Node.js](https://nodejs.org/) (version 18.18.2)
 - [IPFS](https://ipfs.io/) (optional: if you want to run your own IPFS node)
 
 ### Installation
